@@ -67,3 +67,45 @@ Primitive Game-dev Team의 게임 기획 초안입니다. 현재 콘셉트와 �
 - 이벤트의 발생 조건과 플레이 방식
 - 챕터 2의 요리 리듬 게임 세부 구성
 - 챕터 1·2 구현 이후 챕터 3 기획
+
+## 개발 환경
+
+- **Unity:** 6.3 LTS (`6000.3.26f1`)
+- **프로젝트:** 공식 2D 템플릿 기반, Built-in Render Pipeline
+- **입력:** Unity Input System
+- **시작 씬:** `Assets/Scenes/Main.unity`
+
+### 프로젝트 열기
+
+1. Unity Hub에서 `6000.3.26f1` Editor를 설치합니다.
+2. Unity Hub의 **Add project from disk**로 이 저장소의 루트 폴더를 추가합니다. `Assets`, `Packages`, `ProjectSettings`가 있는 폴더입니다.
+3. 프로젝트를 열고 패키지 설치와 에셋 임포트가 끝날 때까지 기다립니다.
+4. `Assets/Scenes/Main.unity`를 엽니다.
+
+현재 시작 씬에는 2D용 기본 카메라가 있으며, 게임 플레이는 아직 구현하지 않았습니다.
+
+### 폴더 구조
+
+| 경로 | 용도 |
+| --- | --- |
+| [`Planning/`](Planning/README.md) | 기획 문서 |
+| `Assets/Art/Characters/` | 캐릭터 이미지·스프라이트 |
+| `Assets/Art/Backgrounds/` | 배경 이미지 |
+| `Assets/Art/Props/` | 사물·이벤트 이미지 |
+| `Assets/Art/UI/` | UI 이미지 |
+| `Assets/Audio/Music/` | 배경 음악·리듬 게임 음악 |
+| `Assets/Audio/SFX/` | 효과음 |
+| `Assets/Prefabs/` | 재사용할 게임 오브젝트 |
+| `Assets/Scenes/` | Unity 씬 |
+| `Assets/Scripts/` | C# 코드 |
+| `Assets/Settings/` | 입력 등 에셋 형태의 설정 |
+| `Packages/` | 패키지 목록과 버전 잠금 파일 |
+| `ProjectSettings/` | Unity 프로젝트 공통 설정 |
+
+### 협업 설정 및 검증
+
+- Editor 기본 모드를 **2D**, 에셋 직렬화를 **Force Text**, 메타데이터 관리를 **Visible Meta Files**로 설정했습니다.
+- 에셋을 추가하거나 이동할 때 `.meta` 파일도 함께 커밋합니다.
+- `Library`, `Temp`, `Logs`, `UserSettings` 등 생성 파일은 Git에서 제외합니다.
+- Unity CLI의 프로젝트 구조 검사로 메타데이터, GUID 중복, 패키지 목록, Editor 버전을 확인했습니다.
+- 초기 설정을 준비한 PC에는 Unity Editor가 설치되어 있지 않아, Editor에서의 임포트·실행·빌드 검증은 아직 하지 않았습니다.
