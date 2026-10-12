@@ -89,6 +89,7 @@ Primitive Game-dev Team의 게임 기획 초안입니다. 현재 콘셉트와 �
 | 경로 | 용도 |
 | --- | --- |
 | [`Planning/`](Planning/README.md) | 기획 문서 |
+| [`drawed/`](drawed/README.md) | 간단한 그림 기획·스케치 |
 | `Assets/Art/Characters/` | 캐릭터 이미지·스프라이트 |
 | `Assets/Art/Backgrounds/` | 배경 이미지 |
 | `Assets/Art/Props/` | 사물·이벤트 이미지 |
