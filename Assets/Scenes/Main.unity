@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 10
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -38,13 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
-  m_GIWorkflowMode: 1
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -67,44 +66,41 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
-    m_BakeBackend: 0
+    m_BakeBackend: 2
     m_PVRSampling: 1
     m_PVRDirectSampleCount: 32
-    m_PVRSampleCount: 500
+    m_PVRSampleCount: 512
     m_PVRBounces: 2
-    m_PVREnvironmentSampleCount: 500
+    m_PVREnvironmentSampleCount: 256
     m_PVREnvironmentReferencePointCount: 2048
-    m_PVRFilteringMode: 2
-    m_PVRDenoiserTypeDirect: 0
-    m_PVRDenoiserTypeIndirect: 0
-    m_PVRDenoiserTypeAO: 0
+    m_PVRFilteringMode: 1
+    m_PVRDenoiserTypeDirect: 1
+    m_PVRDenoiserTypeIndirect: 1
+    m_PVRDenoiserTypeAO: 1
     m_PVRFilterTypeDirect: 0
     m_PVRFilterTypeIndirect: 0
     m_PVRFilterTypeAO: 0
-    m_PVREnvironmentMIS: 0
+    m_PVREnvironmentMIS: 1
     m_PVRCulling: 1
     m_PVRFilteringGaussRadiusDirect: 1
-    m_PVRFilteringGaussRadiusIndirect: 5
-    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringGaussRadiusIndirect: 1
+    m_PVRFilteringGaussRadiusAO: 1
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 20201, guid: 0000000000000000f000000000000000, type: 0}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    serializedVersion: 2
+    serializedVersion: 3
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
@@ -117,13 +113,13 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 0
+    buildHeightMesh: 0
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &519420028
+--- !u!1 &743354568
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,9 +127,208 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 519420032}
-  - component: {fileID: 519420031}
-  - component: {fileID: 519420029}
+  - component: {fileID: 743354574}
+  - component: {fileID: 743354573}
+  - component: {fileID: 743354572}
+  - component: {fileID: 743354571}
+  - component: {fileID: 743354570}
+  - component: {fileID: 743354569}
+  m_Layer: 0
+  m_Name: Game
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &743354569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743354568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ce5d487bfe529d419a88390d25a7423, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SneakWalk.Runtime::SneakWalk.GameDirector
+  sprites: {fileID: 743354573}
+  ui: {fileID: 743354570}
+--- !u!114 &743354570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743354568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f67a959b27e71446866adc89da82801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SneakWalk.Runtime::SneakWalk.GameUI
+  sprites: {fileID: 743354573}
+--- !u!114 &743354571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743354568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 259990a28bb9690488bca1f78ba7d03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SneakWalk.Runtime::SneakWalk.Metronome
+--- !u!114 &743354572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743354568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a69008dfa358834ea7903eaee910a5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SneakWalk.Runtime::SneakWalk.RhythmClock
+--- !u!114 &743354573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743354568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 522e27c3409b78f4d9afb69283b9d72b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SneakWalk.Runtime::SneakWalk.SpriteLibrary
+  entries:
+  - key: Art/Backgrounds/hallway_background
+    sprite: {fileID: 21300000, guid: 86cbe52b6cea90f42ae2850d2a1d105a, type: 3}
+  - key: Art/Backgrounds/kitchen_background
+    sprite: {fileID: 21300000, guid: 5b96137540f1a804d9218b8e1aab82e4, type: 3}
+  - key: Art/Backgrounds/livingroom_background
+    sprite: {fileID: 21300000, guid: 6365db431ee86f946aa518957142749f, type: 3}
+  - key: Art/Backgrounds/mainRoom_background
+    sprite: {fileID: 21300000, guid: 63a72d60936aaae4fb6e3b203380c643, type: 3}
+  - key: Art/Backgrounds/menu
+    sprite: {fileID: 21300000, guid: 5987e54fa36ecdc48bf661fce4dfaab6, type: 3}
+  - key: Art/Backgrounds/myRoom_background
+    sprite: {fileID: 21300000, guid: ef30441914376bb41a3d96fefa005651, type: 3}
+  - key: Art/Characters/me/p1
+    sprite: {fileID: 21300000, guid: cbba69358ea9fb640b3e65480c9bb267, type: 3}
+  - key: Art/Characters/me/p2
+    sprite: {fileID: 21300000, guid: 98a41e488fc244545a2bd937513e39b3, type: 3}
+  - key: Art/Characters/me/p3
+    sprite: {fileID: 21300000, guid: 90d973be645c3a94c9ec40cded32dca1, type: 3}
+  - key: Art/Characters/me/p4
+    sprite: {fileID: 21300000, guid: eb171561017048942bf4069f7726d552, type: 3}
+  - key: Art/Props/buttons/menu_exit_button
+    sprite: {fileID: 21300000, guid: 90e2364993f12d144a4e1cf10017c4fb, type: 3}
+  - key: Art/Props/buttons/menu_setting_button
+    sprite: {fileID: 21300000, guid: c3b2ec385d2a3644ead9959032c5e552, type: 3}
+  - key: Art/Props/buttons/menu_start_button
+    sprite: {fileID: 21300000, guid: e7e4d26eb6d361d4293bb5d13391b569, type: 3}
+  - key: Art/Props/hallway/boiler
+    sprite: {fileID: 21300000, guid: 4dbe0be472825b047ae29eb8901c3529, type: 3}
+  - key: Art/Props/hallway/clock
+    sprite: {fileID: 21300000, guid: c3c0f40f70dbe4a4f9176134ee8cdbf2, type: 3}
+  - key: Art/Props/hallway/drawer
+    sprite: {fileID: 21300000, guid: 56f85f083d1425f4aa40eaaa6fa9089c, type: 3}
+  - key: Art/Props/hallway/intercom
+    sprite: {fileID: 21300000, guid: f93850bb7dd399341b9fec7d04d69fe6, type: 3}
+  - key: Art/Props/hallway/map
+    sprite: {fileID: 21300000, guid: 6a23fe8428af4144fa0aebb715c5d750, type: 3}
+  - key: Art/Props/hallway/switch
+    sprite: {fileID: 21300000, guid: c0abb01192546b9449f2e16ff04d7feb, type: 3}
+  - key: Art/Props/kitchen/cabinet2
+    sprite: {fileID: 21300000, guid: 6044b005d4ca8d649abc70bb65d8c5b2, type: 3}
+  - key: Art/Props/kitchen/fridge
+    sprite: {fileID: 21300000, guid: 8d79a702151947049b156eda8d3a110d, type: 3}
+  - key: Art/Props/kitchen/hood
+    sprite: {fileID: 21300000, guid: 9b41f2d93de0f4b42ade128327c450e8, type: 3}
+  - key: Art/Props/kitchen/long_cabinet
+    sprite: {fileID: 21300000, guid: 7dcd391217e5ed442a3fdfc6f6df7e98, type: 3}
+  - key: Art/Props/kitchen/sink
+    sprite: {fileID: 21300000, guid: 94751c1c16d73de43860b35c5a0cc51e, type: 3}
+  - key: Art/Props/livingroom/clock
+    sprite: {fileID: 21300000, guid: b2d6dc630b85a354db3f18949ee1f974, type: 3}
+  - key: Art/Props/livingroom/coffeeTable
+    sprite: {fileID: 21300000, guid: bfba345eeae07674cb076a193275396f, type: 3}
+  - key: Art/Props/livingroom/event_plant
+    sprite: {fileID: 21300000, guid: 9f10d0f0e27bbc043a55bcd404c97f37, type: 3}
+  - key: Art/Props/livingroom/picture
+    sprite: {fileID: 21300000, guid: b28d1a06bb337754d8b454810fe49b62, type: 3}
+  - key: Art/Props/livingroom/plants
+    sprite: {fileID: 21300000, guid: c0e48e3a06b10b6408a3d8029b58e13f, type: 3}
+  - key: Art/Props/livingroom/shelf
+    sprite: {fileID: 21300000, guid: deb40d68b09c89b4dac701ea4ce71db6, type: 3}
+  - key: Art/Props/livingroom/sofa
+    sprite: {fileID: 21300000, guid: d41d12b2e13fcf740826c215648fd7a1, type: 3}
+  - key: Art/Props/livingroom/tv
+    sprite: {fileID: 21300000, guid: d76eb410da20a694692001d99c85fbd1, type: 3}
+  - key: Art/Props/mainRoom/bed
+    sprite: {fileID: 21300000, guid: 7d8fddc4030091a44a221cb8e852e34a, type: 3}
+  - key: Art/Props/mainRoom/closet
+    sprite: {fileID: 21300000, guid: e4d269c0e39573b4fbc5baf904e7c94c, type: 3}
+  - key: Art/Props/mainRoom/hanger
+    sprite: {fileID: 21300000, guid: a5417fc8c61816549b760a04c3b536d6, type: 3}
+  - key: Art/Props/mainRoom/mirror
+    sprite: {fileID: 21300000, guid: a44a11aca864df54ea61e76f582e8128, type: 3}
+  - key: Art/Props/mainRoom/vanity
+    sprite: {fileID: 21300000, guid: f01b07120cbd39f489901fa51d6487bc, type: 3}
+  - key: Art/Props/myRoom/bed
+    sprite: {fileID: 21300000, guid: b76f11b3b624ce74296e21b8c710e4a8, type: 3}
+  - key: Art/Props/myRoom/calendar
+    sprite: {fileID: 21300000, guid: 5cf7422dd839d4f4fbe1d61b5cc75ef2, type: 3}
+  - key: Art/Props/myRoom/desk
+    sprite: {fileID: 21300000, guid: 6cc17795f3fc5254197f040021111c71, type: 3}
+  - key: Art/Props/myRoom/dresser
+    sprite: {fileID: 21300000, guid: ace1db4344d145f44a7478a306a5c6ad, type: 3}
+  - key: Art/Props/myRoom/mirror
+    sprite: {fileID: 21300000, guid: 986654ffe2b45f843a0382083bd74e1f, type: 3}
+  - key: Art/Props/myRoom/pictures
+    sprite: {fileID: 21300000, guid: 9aa90115426024f4ca80f1bbaa0610fb, type: 3}
+  - key: Art/Props/other/cabinet
+    sprite: {fileID: 21300000, guid: a28ca3209891f524bb5467945997efea, type: 3}
+  - key: Art/Props/other/counter
+    sprite: {fileID: 21300000, guid: c090aa56aa410a84386fe87ba2c14943, type: 3}
+  playerFrames:
+  - key: frame0
+    sprite: {fileID: 4334783836991956000, guid: d82074286a7bd2c4dbecd3b91e439e36, type: 3}
+  - key: frame1
+    sprite: {fileID: 7388399842426930641, guid: d82074286a7bd2c4dbecd3b91e439e36, type: 3}
+  - key: frame2
+    sprite: {fileID: 6757282713640645180, guid: d82074286a7bd2c4dbecd3b91e439e36, type: 3}
+  - key: frame3
+    sprite: {fileID: -6781412095145881161, guid: d82074286a7bd2c4dbecd3b91e439e36, type: 3}
+--- !u!4 &743354574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743354568}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1276747477
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1276747480}
+  - component: {fileID: 1276747479}
+  - component: {fileID: 1276747478}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -141,31 +336,39 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &519420029
+--- !u!81 &1276747478
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
+  m_GameObject: {fileID: 1276747477}
   m_Enabled: 1
---- !u!20 &519420031
+--- !u!20 &1276747479
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
+  m_GameObject: {fileID: 1276747477}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.06, g: 0.06, b: 0.08, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -173,36 +376,43 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100
   field of view: 60
   orthographic: 1
-  orthographic size: 5
-  m_Depth: -1
+  orthographic size: 5.4
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
-  m_TargetEye: 0
+  m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 0
+  m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 0
+  m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!4 &519420032
+--- !u!4 &1276747480
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
+  m_GameObject: {fileID: 1276747477}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots:
+  - {fileID: 1276747480}
+  - {fileID: 743354574}

@@ -82,7 +82,7 @@ Primitive Game-dev Team의 게임 기획 초안입니다. 현재 콘셉트와 �
 3. 프로젝트를 열고 패키지 설치와 에셋 임포트가 끝날 때까지 기다립니다.
 4. `Assets/Scenes/Main.unity`를 엽니다.
 
-현재 시작 씬에는 2D용 기본 카메라가 있으며, 게임 플레이는 아직 구현하지 않았습니다.
+`Assets/Scenes/Main.unity`가 시작 씬입니다. 챕터 1 플레이는 이 씬 하나에서 메뉴 → 게임 → 결과 순서로 진행됩니다.
 
 ### 폴더 구조
 
@@ -107,6 +107,49 @@ Primitive Game-dev Team의 게임 기획 초안입니다. 현재 콘셉트와 �
 
 - Editor 기본 모드를 **2D**, 에셋 직렬화를 **Force Text**, 메타데이터 관리를 **Visible Meta Files**로 설정했습니다.
 - 에셋을 추가하거나 이동할 때 `.meta` 파일도 함께 커밋합니다.
-- `Library`, `Temp`, `Logs`, `UserSettings` 등 생성 파일은 Git에서 제외합니다.
-- Unity CLI의 프로젝트 구조 검사로 메타데이터, GUID 중복, 패키지 목록, Editor 버전을 확인했습니다.
-- 초기 설정을 준비한 PC에는 Unity Editor가 설치되어 있지 않아, Editor에서의 임포트·실행·빌드 검증은 아직 하지 않았습니다.
+- `Library`, `Temp`, `Logs`, `UserSettings`, `Previews` 등 생성 파일은 Git에서 제외합니다.
+- Unity 6000.3.26f1로 실제 임포트·컴파일·빌드를 확인했고, 패키지 버전을 이 Editor의 권장 버전으로 맞췄습니다.
+
+## 실행 방법
+
+1. Unity Hub에서 `6000.3.26f1` Editor를 설치합니다.
+2. Unity Hub의 **Add project from disk**로 이 저장소의 루트 폴더를 추가합니다.
+3. `Assets/Scenes/Main.unity`를 열고 Play를 누릅니다.
+4. 명령줄로 빌드하려면:
+
+```powershell
+& "C:\Program Files\Unity\Hub\Editor\6000.3.26f1\Editor\Unity.exe" `
+  -batchmode -nographics -quit -projectPath . `
+  -buildTarget StandaloneWindows64 -buildWindows64Player .\Build\SneakWalk.exe `
+  -logFile .\Logs\build.log
+```
+
+씬을 코드로 다시 만들려면 메뉴 **SneakWalk > Scene > Rebuild Main Scene**을 실행합니다. 아트를 추가한 뒤 한 번 돌리면 스프라이트 테이블이 갱신됩니다.
+
+## 조작
+
+| 입력 | 동작 |
+| --- | --- |
+| 클릭 / Space / Enter | 박자에 맞춰 걸음을 멈춘다 (판정 대상) |
+| Space / Enter | 시작 화면에서 게임 시작 |
+| R | 결과 화면에서 다시 하기 |
+| M / Esc | 결과 화면에서 메뉴로 |
+
+## 구현 상태
+
+- **챕터 1 플레이 가능**: 내 방 → 거실 → 부엌 → 물 마시기 → 내 방. 규칙은 [docs/chapter1-design.md](docs/chapter1-design.md)에 정리했습니다.
+- 검증: EditMode 테스트 10개, PlayMode 테스트 4개 통과. 자동 플레이 테스트가 챕터를 완주합니다(성공, 38.7초, 소음 0). Windows 빌드 성공.
+- 아직 없음: 챕터 2, 음악 파일, 사운드 효과, 시각 박자 표시(요청에 따라 미구현), 설정 화면(자리만 있음).
+
+## AI 생성 고지
+
+이 저장소의 `ai/rhythm-ch1` 브랜치에 있는 챕터 1 구현은 **AI 에이전트가 생성한 코드**입니다.
+
+- 대상: `Assets/Scripts/**`, `Assets/Tests/**`, `Assets/Editor/SneakWalkSceneBuilder.cs`, `docs/chapter1-design.md`, 이 README의 "실행 방법"·"조작"·"구현 상태"·"AI 생성 고지" 절, 그리고 `Packages/manifest.json`의 패키지 버전 수정
+- 커밋 메시지에 `AI-Generated: true` 트레일러가 붙습니다.
+- 생성 환경: Unity 6000.3.26f1, Windows 11
+- 검증: 배치모드 임포트·컴파일, EditMode/PlayMode 테스트, 자동 플레이 완주, Windows 빌드, 방 합성 렌더
+- 한계: 사람이 직접 조작해 확인한 손맛(입력 지연, 난이도)은 검증하지 않았습니다. 아트·기획 원본은 AI가 만들지 않았습니다.
+
+사람의 리뷰 없이 병합하지 마세요. 특히 `GameConfig.cs`의 수치는 플레이 감각에 직결되므로 직접 만져 보고 조정하는 것을 권합니다.
+
