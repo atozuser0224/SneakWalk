@@ -28,6 +28,11 @@ namespace SneakWalk.EditorTools
         const float BackgroundBottomY = -5.4f;
         const float FloorY = -3.62f;
 
+        // The room strip is 4000px at PPU 100 = 40 units wide and its pivot is centered,
+        // so place the sprite centre at +20 to make room-local x run 0..40.
+        const float RoomWidthUnits = 40f;
+        const float BackgroundCenterX = RoomWidthUnits * 0.5f;
+
         static string OutDir { get { return Path.GetFullPath(Path.Combine(Application.dataPath, "../Previews")); } }
 
         [MenuItem("SneakWalk/Render/Room Previews")]
@@ -49,13 +54,13 @@ namespace SneakWalk.EditorTools
             RenderRoom("kitchen_background", "03_kitchen_left", 9.6f, new[]
             {
                 P("kitchen/fridge", 4.0f, 0f), P("kitchen/cabinet2", 9.5f, 0f),
-                P("kitchen/sink", 15.0f, 0f), P("kitchen/hood", 15.0f, 3.4f)
+                P("kitchen/sink", 15.0f, 0f)
             });
 
             RenderRoom("livingroom_background", "04_livingroom_left", 9.6f, new[]
             {
                 P("livingroom/sofa", 6.0f, 0f), P("livingroom/coffeeTable", 12.0f, 0f),
-                P("livingroom/tv", 17.0f, 0f), P("livingroom/clock", 20.0f, 2.6f)
+                P("livingroom/tv", 16.5f, 0f), P("livingroom/clock", 2.5f, 2.6f)
             });
 
             RenderPlayerFrames();
@@ -78,7 +83,7 @@ namespace SneakWalk.EditorTools
             NewEmptyScene();
             var cam = NewCamera(cameraX);
 
-            AddSprite(LoadSprite("Assets/Art/Backgrounds/" + backgroundName + ".png"), 0f, BackgroundBottomY, 0, "Background");
+            AddSprite(LoadSprite("Assets/Art/Backgrounds/" + backgroundName + ".png"), BackgroundCenterX, BackgroundBottomY, 0, "Background");
             foreach (var p in props)
                 AddSprite(LoadSprite(p.SpritePath), p.X, FloorY + p.YOffset, 10, Path.GetFileNameWithoutExtension(p.SpritePath));
 
@@ -93,7 +98,7 @@ namespace SneakWalk.EditorTools
         {
             NewEmptyScene();
             var cam = NewCamera(9.6f);
-            AddSprite(LoadSprite("Assets/Art/Backgrounds/myRoom_background.png"), 9.6f, BackgroundBottomY, 0, "Background");
+            AddSprite(LoadSprite("Assets/Art/Backgrounds/myRoom_background.png"), BackgroundCenterX, BackgroundBottomY, 0, "Background");
             for (int i = 0; i < 4; i++)
                 AddSprite(LoadSheetSprite(i), 4.0f + i * 4.2f, FloorY, 30, "PlayerFrame" + i);
             Save(cam, "05_player_frames");
