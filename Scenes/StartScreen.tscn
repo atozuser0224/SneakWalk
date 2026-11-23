@@ -1,0 +1,675 @@
+[gd_scene load_steps=34 format=3]
+
+[ext_resource type="Texture2D" path="res://Assets/Art/Backgrounds/home_panorama.png" id="1_panorama"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/BlackHanSans-Regular.ttf" id="2_title"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/GothicA1-Regular.ttf" id="3_regular"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/GothicA1-Bold.ttf" id="4_bold"]
+[ext_resource type="Script" path="res://Scripts/StartScreen.gd" id="5_script"]
+[ext_resource type="Shader" path="res://Scripts/home_light.gdshader" id="6_shader"]
+[ext_resource type="Texture2D" path="res://Assets/Art/UI/toggle_off.svg" id="7_off"]
+[ext_resource type="Texture2D" path="res://Assets/Art/UI/toggle_on.svg" id="8_on"]
+[ext_resource type="Texture2D" path="res://Assets/Art/UI/slider_grabber.svg" id="9_grabber"]
+[ext_resource type="Texture2D" path="res://Assets/Art/UI/arrow_left.svg" id="10_left"]
+[ext_resource type="Texture2D" path="res://Assets/Art/UI/arrow_right.svg" id="11_right"]
+[ext_resource type="Texture2D" path="res://Assets/Art/Backgrounds/home_panorama_normal.png" id="12_normal"]
+[ext_resource type="Script" path="res://Scripts/LightRig.gd" id="13_lightrig"]
+[ext_resource type="Shader" path="res://Scripts/vignette_grain.gdshader" id="14_vignette"]
+[ext_resource type="Texture2D" path="res://Assets/Art/Backgrounds/home_occluders.png" id="15_occluders"]
+[ext_resource type="Shader" path="res://Scripts/rt_overlay.gdshader" id="16_rt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_normal"]
+content_margin_left = 28.0
+content_margin_top = 10.0
+content_margin_right = 28.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 1, 1, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.905, 0.87, 0.918, 1)
+corner_radius_top_left = 42
+corner_radius_top_right = 42
+corner_radius_bottom_right = 42
+corner_radius_bottom_left = 42
+shadow_color = Color(0.15, 0.1, 0.15, 0.1)
+shadow_size = 10
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_hover"]
+content_margin_left = 28.0
+content_margin_top = 10.0
+content_margin_right = 28.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 0.965, 0.978, 0.98)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.878, 0.416, 0.561, 1)
+corner_radius_top_left = 42
+corner_radius_top_right = 42
+corner_radius_bottom_right = 42
+corner_radius_bottom_left = 42
+shadow_color = Color(0.15, 0.1, 0.15, 0.14)
+shadow_size = 14
+shadow_offset = Vector2(0, 7)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_pressed"]
+content_margin_left = 28.0
+content_margin_top = 10.0
+content_margin_right = 28.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 0.906, 0.945, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.851, 0.361, 0.522, 1)
+corner_radius_top_left = 42
+corner_radius_top_right = 42
+corner_radius_bottom_right = 42
+corner_radius_bottom_left = 42
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(1, 0.996, 0.984, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.909, 0.882, 0.918, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0.15, 0.1, 0.15, 0.18)
+shadow_size = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slider_track"]
+expand_margin_top = -9.0
+expand_margin_bottom = -9.0
+bg_color = Color(0.925, 0.905, 0.933, 1)
+corner_radius_top_left = 9
+corner_radius_top_right = 9
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slider_fill"]
+expand_margin_top = -9.0
+expand_margin_bottom = -9.0
+bg_color = Color(0.878, 0.416, 0.561, 1)
+corner_radius_top_left = 9
+corner_radius_top_right = 9
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slider_fill_hl"]
+expand_margin_top = -9.0
+expand_margin_bottom = -9.0
+bg_color = Color(0.918, 0.537, 0.655, 1)
+corner_radius_top_left = 9
+corner_radius_top_right = 9
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_accent"]
+bg_color = Color(0.878, 0.416, 0.561, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+bg_color = Color(1, 0.996, 0.984, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.909, 0.882, 0.918, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0.15, 0.1, 0.15, 0.18)
+shadow_size = 28
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_primary_normal"]
+content_margin_left = 24.0
+content_margin_top = 8.0
+content_margin_right = 24.0
+content_margin_bottom = 8.0
+bg_color = Color(0.878, 0.416, 0.561, 1)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+shadow_color = Color(0.8, 0.3, 0.45, 0.25)
+shadow_size = 10
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_primary_hover"]
+content_margin_left = 24.0
+content_margin_top = 8.0
+content_margin_right = 24.0
+content_margin_bottom = 8.0
+bg_color = Color(0.918, 0.537, 0.655, 1)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+shadow_color = Color(0.8, 0.3, 0.45, 0.3)
+shadow_size = 14
+shadow_offset = Vector2(0, 7)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_primary_pressed"]
+content_margin_left = 24.0
+content_margin_top = 8.0
+content_margin_right = 24.0
+content_margin_bottom = 8.0
+bg_color = Color(0.851, 0.361, 0.522, 1)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_primary_disabled"]
+content_margin_left = 24.0
+content_margin_top = 8.0
+content_margin_right = 24.0
+content_margin_bottom = 8.0
+bg_color = Color(0.87, 0.85, 0.88, 1)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_flat"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_panorama"]
+diffuse_texture = ExtResource("1_panorama")
+normal_texture = ExtResource("12_normal")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rt"]
+shader = ExtResource("16_rt")
+shader_parameter/occluder_map = ExtResource("15_occluders")
+shader_parameter/viewport_size = Vector2(1920, 1080)
+shader_parameter/pano_offset = Vector2(0, 0)
+shader_parameter/pano_size = Vector2(7680, 1080)
+shader_parameter/floor_y = 0.865
+shader_parameter/ao_strength = 0.25
+shader_parameter/shadow_strength = 0.3
+shader_parameter/reflection_strength = 0.13
+shader_parameter/vignette_strength = 0.2
+shader_parameter/grain_strength = 0.012
+
+[sub_resource type="Environment" id="Environment_glow"]
+background_mode = 3
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 0.45
+glow_strength = 0.8
+glow_bloom = 0.05
+glow_blend_mode = 1
+glow_hdr_threshold = 0.9
+glow_hdr_scale = 1.2
+
+[node name="StartScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_script")
+
+[node name="WorldLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Panorama" type="Node2D" parent="WorldLayer"]
+unique_name_in_owner = true
+
+
+
+[node name="LightRig" type="Node2D" parent="WorldLayer/Panorama"]
+script = ExtResource("13_lightrig")
+
+[node name="RtOverlay" type="ColorRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_rt")
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MenuUI" type="Control" parent="."]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Logo" type="Control" parent="MenuUI"]
+unique_name_in_owner = true
+offset_top = 120.0
+offset_right = 1920.0
+offset_bottom = 400.0
+mouse_filter = 2
+
+[node name="LogoFront" type="Label" parent="MenuUI/Logo"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.23, 0.21, 0.26, 1)
+theme_override_fonts/font = ExtResource("2_title")
+theme_override_font_sizes/font_size = 170
+text = "살금살금"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TitleAccent" type="Panel" parent="MenuUI"]
+offset_left = 924.0
+offset_top = 392.0
+offset_right = 996.0
+offset_bottom = 398.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_accent")
+
+[node name="Tagline" type="Label" parent="MenuUI"]
+offset_top = 416.0
+offset_right = 1920.0
+offset_bottom = 462.0
+theme_override_colors/font_color = Color(0.55, 0.5, 0.58, 1)
+theme_override_fonts/font = ExtResource("3_regular")
+theme_override_font_sizes/font_size = 28
+text = "위층 주민의 조용한 작전"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="Control" parent="MenuUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="StartButton" type="Button" parent="MenuUI/Buttons"]
+unique_name_in_owner = true
+offset_left = 830.0
+offset_top = 508.0
+offset_right = 1090.0
+offset_bottom = 592.0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.23, 0.21, 0.26, 1)
+theme_override_colors/font_hover_color = Color(0.23, 0.21, 0.26, 1)
+theme_override_colors/font_pressed_color = Color(0.23, 0.21, 0.26, 1)
+theme_override_fonts/font = ExtResource("4_bold")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_hover")
+text = "시작"
+
+[node name="SettingsButton" type="Button" parent="MenuUI/Buttons"]
+unique_name_in_owner = true
+offset_left = 830.0
+offset_top = 612.0
+offset_right = 1090.0
+offset_bottom = 696.0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.23, 0.21, 0.26, 1)
+theme_override_colors/font_hover_color = Color(0.23, 0.21, 0.26, 1)
+theme_override_colors/font_pressed_color = Color(0.23, 0.21, 0.26, 1)
+theme_override_fonts/font = ExtResource("4_bold")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_hover")
+text = "설정"
+
+[node name="ExitButton" type="Button" parent="MenuUI/Buttons"]
+unique_name_in_owner = true
+offset_left = 1690.0
+offset_top = 980.0
+offset_right = 1850.0
+offset_bottom = 1036.0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.45, 0.41, 0.48, 1)
+theme_override_colors/font_hover_color = Color(0.23, 0.21, 0.26, 1)
+theme_override_colors/font_pressed_color = Color(0.23, 0.21, 0.26, 1)
+theme_override_fonts/font = ExtResource("3_regular")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_hover")
+text = "종료"
+
+[node name="Version" type="Label" parent="MenuUI"]
+offset_left = 32.0
+offset_top = 1028.0
+offset_right = 400.0
+offset_bottom = 1060.0
+theme_override_colors/font_color = Color(0.3, 0.27, 0.33, 0.5)
+theme_override_fonts/font = ExtResource("3_regular")
+theme_override_font_sizes/font_size = 20
+text = "v0.1  PROTOTYPE"
+
+[node name="ChapterUI" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="BackButton" type="Button" parent="ChapterUI"]
+unique_name_in_owner = true
+offset_left = 36.0
+offset_top = 26.0
+offset_right = 156.0
+offset_bottom = 80.0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.45, 0.41, 0.48, 1)
+theme_override_colors/font_hover_color = Color(0.878, 0.416, 0.561, 1)
+theme_override_colors/font_pressed_color = Color(0.851, 0.361, 0.522, 1)
+theme_override_fonts/font = ExtResource("4_bold")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_flat")
+text = "메뉴"
+
+[node name="ScreenTitle" type="Label" parent="ChapterUI"]
+offset_right = 1920.0
+offset_top = 24.0
+offset_bottom = 84.0
+theme_override_colors/font_color = Color(0.23, 0.21, 0.26, 1)
+theme_override_fonts/font = ExtResource("2_title")
+theme_override_font_sizes/font_size = 40
+text = "챕터 선택"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeftArrow" type="TextureButton" parent="ChapterUI"]
+unique_name_in_owner = true
+offset_left = 48.0
+offset_top = 500.0
+offset_right = 120.0
+offset_bottom = 572.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("10_left")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="RightArrow" type="TextureButton" parent="ChapterUI"]
+unique_name_in_owner = true
+offset_left = 1800.0
+offset_top = 500.0
+offset_right = 1872.0
+offset_bottom = 572.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("11_right")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ChapterCard" type="PanelContainer" parent="ChapterUI"]
+unique_name_in_owner = true
+offset_left = 560.0
+offset_top = 780.0
+offset_right = 1360.0
+offset_bottom = 1000.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="Margin" type="MarginContainer" parent="ChapterUI/ChapterCard"]
+theme_override_constants/margin_left = 34
+theme_override_constants/margin_top = 26
+theme_override_constants/margin_right = 34
+theme_override_constants/margin_bottom = 26
+
+[node name="Row" type="HBoxContainer" parent="ChapterUI/ChapterCard/Margin"]
+theme_override_constants/separation = 24
+
+[node name="Info" type="VBoxContainer" parent="ChapterUI/ChapterCard/Margin/Row"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="ChapterLabel" type="Label" parent="ChapterUI/ChapterCard/Margin/Row/Info"]
+unique_name_in_owner = true
+theme_override_colors/font_color = Color(0.878, 0.416, 0.561, 1)
+theme_override_fonts/font = ExtResource("4_bold")
+theme_override_font_sizes/font_size = 22
+text = "챕터 1"
+
+[node name="TitleLabel" type="Label" parent="ChapterUI/ChapterCard/Margin/Row/Info"]
+unique_name_in_owner = true
+theme_override_colors/font_color = Color(0.23, 0.21, 0.26, 1)
+theme_override_fonts/font = ExtResource("2_title")
+theme_override_font_sizes/font_size = 44
+text = "물 마시러 가기"
+
+[node name="DescLabel" type="Label" parent="ChapterUI/ChapterCard/Margin/Row/Info"]
+unique_name_in_owner = true
+theme_override_colors/font_color = Color(0.55, 0.5, 0.58, 1)
+theme_override_fonts/font = ExtResource("3_regular")
+theme_override_font_sizes/font_size = 23
+text = "내 방 → 거실 → 부엌 → 다시 내 방"
+
+[node name="ChapterStartButton" type="Button" parent="ChapterUI/ChapterCard/Margin/Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(170, 56)
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(0.55, 0.5, 0.58, 1)
+theme_override_fonts/font = ExtResource("4_bold")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_primary_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_primary_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_primary_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_primary_hover")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_primary_disabled")
+text = "시작"
+
+[node name="Dots" type="HBoxContainer" parent="ChapterUI"]
+unique_name_in_owner = true
+offset_right = 1920.0
+offset_top = 1030.0
+offset_bottom = 1058.0
+alignment = 1
+theme_override_constants/separation = 12
+
+[node name="SettingsOverlay" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="SettingsOverlay"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.15, 0.12, 0.16, 0.32)
+
+[node name="Panel" type="PanelContainer" parent="SettingsOverlay"]
+offset_left = 530.0
+offset_top = 280.0
+offset_right = 1390.0
+offset_bottom = 800.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Margin" type="MarginContainer" parent="SettingsOverlay/Panel"]
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 36
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 28
+
+[node name="VBox" type="VBoxContainer" parent="SettingsOverlay/Panel/Margin"]
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="SettingsOverlay/Panel/Margin/VBox"]
+theme_override_colors/font_color = Color(0.23, 0.21, 0.26, 1)
+theme_override_fonts/font = ExtResource("2_title")
+theme_override_font_sizes/font_size = 44
+text = "설정"
+
+[node name="Spacer0" type="Control" parent="SettingsOverlay/Panel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 2)
+
+[node name="BgmGroup" type="VBoxContainer" parent="SettingsOverlay/Panel/Margin/VBox"]
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="SettingsOverlay/Panel/Margin/VBox/BgmGroup"]
+theme_override_colors/font_color = Color(0.23, 0.21, 0.26, 1)
+theme_override_fonts/font = ExtResource("4_bold")
+theme_override_font_sizes/font_size = 26
+text = "배경 음악"
+
+[node name="BgmRow" type="HBoxContainer" parent="SettingsOverlay/Panel/Margin/VBox/BgmGroup"]
+theme_override_constants/separation = 16
+
+[node name="BgmSlider" type="HSlider" parent="SettingsOverlay/Panel/Margin/VBox/BgmGroup/BgmRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_icons/grabber = ExtResource("9_grabber")
+theme_override_icons/grabber_highlight = ExtResource("9_grabber")
+theme_override_styles/slider = SubResource("StyleBoxFlat_slider_track")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_slider_fill")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_slider_fill_hl")
+max_value = 100.0
+step = 1.0
+value = 80.0
+
+[node name="BgmValue" type="Label" parent="SettingsOverlay/Panel/Margin/VBox/BgmGroup/BgmRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+theme_override_colors/font_color = Color(0.55, 0.5, 0.58, 1)
+theme_override_fonts/font = ExtResource("3_regular")
+theme_override_font_sizes/font_size = 24
+text = "80%"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SfxGroup" type="VBoxContainer" parent="SettingsOverlay/Panel/Margin/VBox"]
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="SettingsOverlay/Panel/Margin/VBox/SfxGroup"]
+theme_override_colors/font_color = Color(0.23, 0.21, 0.26, 1)
+theme_override_fonts/font = ExtResource("4_bold")
+theme_override_font_sizes/font_size = 26
+text = "효과음"
+
+[node name="SfxRow" type="HBoxContainer" parent="SettingsOverlay/Panel/Margin/VBox/SfxGroup"]
+theme_override_constants/separation = 16
+
+[node name="SfxSlider" type="HSlider" parent="SettingsOverlay/Panel/Margin/VBox/SfxGroup/SfxRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_icons/grabber = ExtResource("9_grabber")
+theme_override_icons/grabber_highlight = ExtResource("9_grabber")
+theme_override_styles/slider = SubResource("StyleBoxFlat_slider_track")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_slider_fill")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_slider_fill_hl")
+max_value = 100.0
+step = 1.0
+value = 60.0
+
+[node name="SfxValue" type="Label" parent="SettingsOverlay/Panel/Margin/VBox/SfxGroup/SfxRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+theme_override_colors/font_color = Color(0.55, 0.5, 0.58, 1)
+theme_override_fonts/font = ExtResource("3_regular")
+theme_override_font_sizes/font_size = 24
+text = "60%"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Spacer1" type="Control" parent="SettingsOverlay/Panel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 4)
+
+[node name="Toggles" type="VBoxContainer" parent="SettingsOverlay/Panel/Margin/VBox"]
+theme_override_constants/separation = 8
+
+[node name="FullscreenRow" type="HBoxContainer" parent="SettingsOverlay/Panel/Margin/VBox/Toggles"]
+
+[node name="Label" type="Label" parent="SettingsOverlay/Panel/Margin/VBox/Toggles/FullscreenRow"]
+theme_override_colors/font_color = Color(0.23, 0.21, 0.26, 1)
+theme_override_fonts/font = ExtResource("4_bold")
+theme_override_font_sizes/font_size = 26
+text = "전체 화면"
+
+[node name="Spacer" type="Control" parent="SettingsOverlay/Panel/Margin/VBox/Toggles/FullscreenRow"]
+size_flags_horizontal = 3
+
+[node name="FullscreenCheck" type="CheckButton" parent="SettingsOverlay/Panel/Margin/VBox/Toggles/FullscreenRow"]
+unique_name_in_owner = true
+mouse_default_cursor_shape = 2
+theme_override_icons/checked = ExtResource("8_on")
+theme_override_icons/unchecked = ExtResource("7_off")
+theme_override_icons/checked_disabled = ExtResource("8_on")
+theme_override_icons/unchecked_disabled = ExtResource("7_off")
+
+[node name="ShakeRow" type="HBoxContainer" parent="SettingsOverlay/Panel/Margin/VBox/Toggles"]
+
+[node name="Label" type="Label" parent="SettingsOverlay/Panel/Margin/VBox/Toggles/ShakeRow"]
+theme_override_colors/font_color = Color(0.23, 0.21, 0.26, 1)
+theme_override_fonts/font = ExtResource("4_bold")
+theme_override_font_sizes/font_size = 26
+text = "화면 흔들림"
+
+[node name="Spacer" type="Control" parent="SettingsOverlay/Panel/Margin/VBox/Toggles/ShakeRow"]
+size_flags_horizontal = 3
+
+[node name="ShakeCheck" type="CheckButton" parent="SettingsOverlay/Panel/Margin/VBox/Toggles/ShakeRow"]
+unique_name_in_owner = true
+mouse_default_cursor_shape = 2
+theme_override_icons/checked = ExtResource("8_on")
+theme_override_icons/unchecked = ExtResource("7_off")
+theme_override_icons/checked_disabled = ExtResource("8_on")
+theme_override_icons/unchecked_disabled = ExtResource("7_off")
+
+[node name="Spacer2" type="Control" parent="SettingsOverlay/Panel/Margin/VBox"]
+size_flags_vertical = 3
+
+[node name="CloseRow" type="HBoxContainer" parent="SettingsOverlay/Panel/Margin/VBox"]
+alignment = 2
+
+[node name="CloseButton" type="Button" parent="SettingsOverlay/Panel/Margin/VBox/CloseRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 48)
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.55, 0.5, 0.58, 1)
+theme_override_colors/font_hover_color = Color(0.878, 0.416, 0.561, 1)
+theme_override_colors/font_pressed_color = Color(0.851, 0.361, 0.522, 1)
+theme_override_fonts/font = ExtResource("4_bold")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_flat")
+text = "닫기"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_glow")
+
+[node name="Fade" type="ColorRect" parent="."]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)

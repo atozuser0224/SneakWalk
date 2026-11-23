@@ -40,3 +40,13 @@ Desktop.ini
 
 # Keep Unity project sources and metadata tracked, including Assets/*.meta,
 # Packages/manifest.json, Packages/packages-lock.json, and ProjectSettings/.
+
+# Godot-generated files
+/.godot/
+/android/
+/export_presets.cfg
+*.translation
+
+# Design references and screenshots (not part of the game build)
+/Design/
+
