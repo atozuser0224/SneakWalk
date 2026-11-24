@@ -55,10 +55,24 @@ const RHYTHM_PATTERNS := [
 const RESPONSE_WINDOW := 0.18
 const PERFECT_WINDOW := 0.045
 const GOOD_WINDOW := 0.15
-const STEP_DIST := 170.0
-const CAMERA_START := 2400.0
+const STEP_DIST := 260.0
+const CAMERA_START := 2000.0
 const PLAYER_Y := 751.735
 const PLAYER_SCALE := 1.0
+
+const INTERACT_RANGE := 190.0
+const INTERACTABLES := [
+	{"x": 1250.0, "label": "침대 밑 숨기", "action": "hide"},
+	{"x": 1700.0, "label": "책상 뒤지기", "action": "search"},
+	{"x": 2100.0, "label": "서랍장 뒤지기", "action": "search"},
+	{"x": 2700.0, "label": "옷장 숨기", "action": "hide"},
+	{"x": 3200.0, "label": "소파 숨기", "action": "hide"},
+	{"x": 3450.0, "label": "탁자 밑 숨기", "action": "hide"},
+	{"x": 3800.0, "label": "TV 켜기", "action": "tv"},
+	{"x": 4050.0, "label": "책장 뒤지기", "action": "search"},
+	{"x": 4650.0, "label": "냉장고 열기", "action": "fridge"},
+	{"x": 4780.0, "label": "물 마시기", "action": "drink"},
+]
 
 @onready var panorama: Node2D = %Panorama
 @onready var player: AnimatedSprite2D = %PlayerSprite
@@ -66,6 +80,7 @@ const PLAYER_SCALE := 1.0
 @onready var stop_cue: Control = %StopCue
 @onready var judgment: Label = %Judgment
 @onready var combo_label: Label = %Combo
+@onready var interact_prompt: Label = %InteractPrompt
 @onready var noise_bar: ProgressBar = %NoiseBar
 @onready var noise_value: Label = %NoiseValue
 @onready var beat_dot: Panel = %BeatDot
@@ -103,6 +118,9 @@ var heard_count := 0
 var response_hit_count := 0
 var frames_processed := 0
 var chart_clock := 0.0
+var interact_cooldown := 0.0
+var near_interactable: Dictionary = {}
+var drank := false
 
 
 func _ready() -> void:
@@ -133,6 +151,10 @@ func _ready() -> void:
 		_capture_intro_flow()
 	elif "capture_anim" in flags:
 		_capture_anim_flow()
+	elif "test_interact" in flags:
+		_run_interact_test()
+	elif "capture_rooms" in flags:
+		_capture_rooms_flow()
 
 
 func _flags() -> Array[String]:
@@ -185,6 +207,9 @@ func _reset_state() -> void:
 	heard_count = 0
 	response_hit_count = 0
 	chart_clock = 0.0
+	interact_cooldown = 0.0
+	near_interactable = {}
+	drank = false
 	for note in call_notes:
 		note["played"] = false
 		note["mark"] = null
@@ -204,6 +229,7 @@ func _reset_state() -> void:
 	combo_label.text = ""
 	judgment.modulate = Color(1, 1, 1, 0)
 	phase_label.text = "준비"
+	interact_prompt.hide()
 
 
 func _start() -> void:
@@ -258,6 +284,8 @@ func _process(delta: float) -> void:
 		return
 	frames_processed += 1
 	chart_clock += delta
+	interact_cooldown = maxf(0.0, interact_cooldown - delta)
+	_update_interact_prompt()
 	song_time = _get_song_time()
 	_update_phase()
 	_update_call_notes()
@@ -497,6 +525,8 @@ func _finish(success: bool) -> void:
 		result_title.text = "성공"
 		rank_badge.texture = RANK_S if rank == "S" else (RANK_A if rank == "A" else RANK_B)
 		result_desc.text = "PERFECT %d · GOOD %d · MISS %d\n콤보 %d · 소음 %d%%" % [perfect_count, good_count, miss_count, max_combo, int(noise)]
+		if drank:
+			result_desc.text += "\n물 마심"
 	else:
 		result_title.text = "들켰다"
 		rank_badge.texture = RANK_FAIL
@@ -515,8 +545,52 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed("ui_accept"):
 			_start()
 		return
-	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_SPACE:
-		_press_step()
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_SPACE:
+			_press_step()
+		elif event.keycode == KEY_E:
+			_interact()
+
+
+func _update_interact_prompt() -> void:
+	if not started or finished:
+		near_interactable = {}
+		interact_prompt.hide()
+		return
+	var best: Dictionary = {}
+	var best_dist := INTERACT_RANGE
+	for item in INTERACTABLES:
+		var distance := absf(float(item["x"]) - camera_x)
+		if distance <= best_dist:
+			best_dist = distance
+			best = item
+	near_interactable = best
+	interact_prompt.visible = not best.is_empty()
+	if not best.is_empty():
+		interact_prompt.text = "E   %s" % String(best["label"])
+
+
+func _interact() -> void:
+	if not started or finished or near_interactable.is_empty() or interact_cooldown > 0.0:
+		return
+	interact_cooldown = 0.9
+	match String(near_interactable["action"]):
+		"hide":
+			_add_noise(-12.0)
+			_flash("숨었다")
+		"search":
+			_add_noise(5.0)
+			_flash("뒤적")
+		"tv":
+			_add_noise(18.0)
+			_flash("TV 켬")
+		"fridge":
+			_add_noise(8.0)
+			_flash("냉장고")
+		"drink":
+			_add_noise(-10.0)
+			_flash("벌컥")
+			drank = true
 
 
 func _capture_flow() -> void:
@@ -610,6 +684,58 @@ func _capture_anim_flow() -> void:
 	await get_tree().create_timer(0.12).timeout
 	_save_shot("anim_surprise.png")
 	get_tree().quit()
+
+
+func _capture_rooms_flow() -> void:
+	await get_tree().create_timer(0.4).timeout
+	_start()
+	await get_tree().create_timer(0.3).timeout
+	for position in [2000, 2600, 3200, 3800, 4400, 4900]:
+		_set_camera(float(position))
+		await get_tree().create_timer(0.25).timeout
+		_save_shot("room_%d.png" % position)
+	get_tree().quit()
+
+
+func _run_interact_test() -> void:
+	## `--test_interact` 인자로 실행하면 가구 상호작용을 확인하고 종료한다.
+	var failures: Array[String] = []
+	await get_tree().create_timer(0.4).timeout
+	_start()
+	await get_tree().create_timer(0.4).timeout
+
+	camera_x = 4780.0
+	_update_interact_prompt()
+	_expect(interact_prompt.visible, "상호작용 프롬프트가 보여야 함", failures)
+	_expect(interact_prompt.text.contains("물 마시기"), "물 마시기 안내가 떠야 함", failures)
+	var noise_before := noise
+	var drink_key := InputEventKey.new()
+	drink_key.keycode = KEY_E
+	drink_key.pressed = true
+	Input.parse_input_event(drink_key)
+	await get_tree().create_timer(0.25).timeout
+	_expect(drank, "물 마시기 상호작용이 동작해야 함", failures)
+	_expect(noise < noise_before, "물 마시기로 소음이 줄어야 함", failures)
+
+	await get_tree().create_timer(1.0).timeout
+	camera_x = 3800.0
+	_update_interact_prompt()
+	_expect(interact_prompt.text.contains("TV"), "TV 안내가 떠야 함", failures)
+	var noise_before_tv := noise
+	var tv_key := InputEventKey.new()
+	tv_key.keycode = KEY_E
+	tv_key.pressed = true
+	Input.parse_input_event(tv_key)
+	await get_tree().create_timer(0.25).timeout
+	_expect(noise > noise_before_tv, "TV 상호작용으로 소음이 늘어야 함", failures)
+
+	if failures.is_empty():
+		print("TEST_INTERACT_OK")
+		get_tree().quit(0)
+	else:
+		for failure in failures:
+			printerr("TEST_INTERACT_FAIL: " + failure)
+		get_tree().quit(1)
 
 
 func _capture_pause_flow() -> void:

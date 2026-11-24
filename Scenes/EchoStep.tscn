@@ -32,6 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://dxmvfoqlpc3fp" path="res://Assets/Art/Props/kitchen/fridge.png" id="30_fridge"]
 [ext_resource type="Texture2D" uid="uid://clye3msqykxcj" path="res://Assets/Art/Props/kitchen/sink.png" id="31_sink"]
 [ext_resource type="Texture2D" uid="uid://dt6yrleyjhfne" path="res://Assets/Art/Props/kitchen/hood.png" id="32_hood"]
+[ext_resource type="Texture2D" path="res://Assets/Art/Props/mainRoom/closet.png" id="33_closet"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_noise_bg"]
 bg_color = Color(0.88, 0.85, 0.9, 1)
@@ -111,104 +112,110 @@ region_enabled = true
 region_rect = Rect2(0, 0, 2000, 1080)
 
 [node name="KitchenBackground" type="Sprite2D" parent="Panorama" unique_id=397164764]
-position = Vector2(5000, 0)
+position = Vector2(4600, 0)
 texture = ExtResource("16_kitchen_bg")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 2000, 1080)
 
 [node name="BedroomBed" type="Sprite2D" parent="Panorama" unique_id=914597596]
-position = Vector2(1400, 540)
+position = Vector2(1250, 540)
 scale = Vector2(0.62, 0.62)
 texture = ExtResource("17_bed")
 centered = false
 
 [node name="BedroomDesk" type="Sprite2D" parent="Panorama" unique_id=1094050981]
-position = Vector2(1800, 621)
+position = Vector2(1700, 621)
 scale = Vector2(0.48, 0.48)
 texture = ExtResource("18_desk")
 centered = false
 
 [node name="BedroomDresser" type="Sprite2D" parent="Panorama" unique_id=1428403348]
-position = Vector2(2260, 622)
+position = Vector2(2100, 622)
 scale = Vector2(0.48, 0.48)
 texture = ExtResource("19_dresser")
 centered = false
 
 [node name="BedroomMirror" type="Sprite2D" parent="Panorama" unique_id=255797934]
-position = Vector2(2680, 610)
+position = Vector2(2400, 610)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("20_mirror")
 centered = false
 
+[node name="BedroomCloset" type="Sprite2D" parent="Panorama" unique_id=700000001]
+position = Vector2(2700, 540)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("33_closet")
+centered = false
+
 [node name="BedroomPictures" type="Sprite2D" parent="Panorama" unique_id=2058786012]
-position = Vector2(1570, 365)
+position = Vector2(1450, 365)
 scale = Vector2(0.34, 0.34)
 texture = ExtResource("21_room_pictures")
 centered = false
 
 [node name="BedroomCalendar" type="Sprite2D" parent="Panorama" unique_id=1836029321]
-position = Vector2(2110, 365)
+position = Vector2(1900, 365)
 scale = Vector2(0.34, 0.34)
 texture = ExtResource("22_calendar")
 centered = false
 
 [node name="LivingRoomSofa" type="Sprite2D" parent="Panorama" unique_id=1655652361]
-position = Vector2(3040, 657)
+position = Vector2(3200, 657)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("23_sofa")
 centered = false
 
 [node name="LivingRoomTable" type="Sprite2D" parent="Panorama" unique_id=140862968]
-position = Vector2(3510, 739)
+position = Vector2(3450, 739)
 scale = Vector2(0.28, 0.28)
 texture = ExtResource("24_coffee_table")
 centered = false
 
 [node name="LivingRoomTV" type="Sprite2D" parent="Panorama" unique_id=1127702144]
-position = Vector2(4180, 679)
+position = Vector2(3800, 679)
 scale = Vector2(0.38, 0.38)
 texture = ExtResource("25_tv")
 centered = false
 
 [node name="LivingRoomShelf" type="Sprite2D" parent="Panorama" unique_id=1010926673]
-position = Vector2(3900, 385)
+position = Vector2(4050, 385)
 scale = Vector2(0.36, 0.36)
 texture = ExtResource("26_shelf")
 centered = false
 
 [node name="LivingRoomPlants" type="Sprite2D" parent="Panorama" unique_id=1610943337]
-position = Vector2(3660, 668)
+position = Vector2(4250, 668)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("27_plants")
 centered = false
 
 [node name="LivingRoomClock" type="Sprite2D" parent="Panorama" unique_id=1348014841]
-position = Vector2(3660, 350)
+position = Vector2(4400, 350)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("28_clock")
 centered = false
 
 [node name="KitchenCabinet" type="Sprite2D" parent="Panorama" unique_id=1301418281]
-position = Vector2(5000, 700)
+position = Vector2(4950, 700)
 scale = Vector2(0.38, 0.38)
 texture = ExtResource("29_kitchen_cabinet")
 centered = false
 
 [node name="KitchenFridge" type="Sprite2D" parent="Panorama" unique_id=524857259]
-position = Vector2(5620, 560)
+position = Vector2(4650, 560)
 scale = Vector2(0.55, 0.55)
 texture = ExtResource("30_fridge")
 centered = false
 
 [node name="KitchenSink" type="Sprite2D" parent="Panorama" unique_id=1885416805]
-position = Vector2(5210, 684)
+position = Vector2(4780, 684)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("31_sink")
 centered = false
 
 [node name="KitchenHood" type="Sprite2D" parent="Panorama" unique_id=1176128574]
-position = Vector2(5400, 390)
+position = Vector2(4820, 390)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("32_hood")
 centered = false
@@ -322,7 +329,7 @@ offset_bottom = 138.0
 theme_override_colors/font_color = Color(0.45, 0.41, 0.48, 1)
 theme_override_fonts/font = ExtResource("11_regular")
 theme_override_font_sizes/font_size = 24
-text = "Space 걷기   ·   P 일시정지   ·   ESC 메뉴"
+text = "Space 걷기   ·   E 상호작용   ·   P 일시정지"
 
 [node name="NoiseCard" type="Panel" parent="UI" unique_id=2045840507]
 layout_mode = 0
@@ -434,6 +441,21 @@ theme_override_colors/font_color = Color(0.851, 0.361, 0.522, 1)
 theme_override_fonts/font = ExtResource("12_bold")
 theme_override_font_sizes/font_size = 38
 horizontal_alignment = 1
+
+[node name="InteractPrompt" type="Label" parent="UI" unique_id=700000002]
+unique_name_in_owner = true
+visible = false
+offset_left = 560.0
+offset_top = 980.0
+offset_right = 1360.0
+offset_bottom = 1040.0
+theme_override_colors/font_color = Color(0.23, 0.21, 0.26, 1)
+theme_override_colors/font_outline_color = Color(1, 0.996, 0.984, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("12_bold")
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Track" type="ColorRect" parent="UI" unique_id=1420363959]
 visible = false
