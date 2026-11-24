@@ -3,7 +3,7 @@ extends Control
 const CHAPTER_TITLES := [
 	"물 마시러 가기",
 	"아빠의 라면",
-	"??? (추후 기획)",
+	"???",
 ]
 
 @onready var title_label: Label = $Center/Title

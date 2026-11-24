@@ -10,7 +10,7 @@ const PINK := Color(0.878, 0.416, 0.561, 1)
 const CHAPTERS := [
 	{"label": "챕터 1", "title": "물 마시러 가기", "desc": "내 방 → 거실 → 부엌 → 다시 내 방", "locked": false},
 	{"label": "챕터 2", "title": "아빠의 라면", "desc": "안방 → 복도 → 거실 → 부엌 → 안방", "locked": false},
-	{"label": "챕터 3", "title": "???", "desc": "추후 기획 예정입니다", "locked": true},
+	{"label": "챕터 3", "title": "???", "desc": "", "locked": true},
 ]
 
 @onready var panorama: Node2D = %Panorama

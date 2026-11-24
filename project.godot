@@ -19,6 +19,10 @@ config/features=PackedStringArray("4.7", "GL Compatibility")
 
 Settings="*res://Scripts/SettingsManager.gd"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/sprite_frames_generator/plugin.cfg")
+
 [display]
 
 window/size/viewport_width=1920
