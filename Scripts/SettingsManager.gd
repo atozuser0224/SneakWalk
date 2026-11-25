@@ -7,6 +7,7 @@ var sfx_volume: int = 60
 var fullscreen: bool = false
 var screen_shake: bool = true
 var current_chapter: int = 1
+var current_difficulty: int = 1
 
 
 func _ready() -> void:

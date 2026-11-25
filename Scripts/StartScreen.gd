@@ -8,9 +8,8 @@ const SLIDE := 1920.0
 const PINK := Color(0.878, 0.416, 0.561, 1)
 
 const CHAPTERS := [
-	{"label": "난이도 1", "title": "물 마시러 가기 · 기본", "desc": "여유로운 발걸음 · 정박과 기본 엇박 (120 BPM)", "locked": false},
-	{"label": "난이도 2", "title": "빽빽한 발걸음", "desc": "8분음표 연타와 엇박 · 더블 홀드 (126 BPM)", "locked": false},
-	{"label": "난이도 3", "title": "초고밀도 살금살금", "desc": "쉬지 않는 8분음표 풀채움 · 고속 패턴 (134 BPM)", "locked": false},
+	{"label": "챕터 1", "title": "내가 물 마시러 가기", "desc": "내 방 → 거실 → 부엌 → 물 마시기 → 부엌 → 거실 → 내 방\n부엌 이후 속도 증가 · 느리면 어머니에게 들킴", "locked": false},
+	{"label": "챕터 2", "title": "아빠가 라면 끓여 먹기", "desc": "안방 → 복도 → 거실 → 부엌 → 라면 조리 → 거실 → 복도 → 안방\n요리 과정 자체를 리듬 게임으로 구성", "locked": false},
 ]
 
 @onready var panorama: Node2D = %Panorama
@@ -43,6 +42,8 @@ const CHAPTERS := [
 
 var mode := Mode.MENU
 var index := 0
+var selected_difficulty := 1
+var difficulty_buttons: Array[Button] = []
 var busy := false
 var _card_base_x := 0.0
 var _dot_panels: Array[Panel] = []
@@ -75,6 +76,7 @@ func _ready() -> void:
 
 	_start_logo_float()
 	_build_dots()
+	_build_difficulty_selector()
 	_sync_settings_ui()
 
 	chapter_ui.hide()
@@ -286,11 +288,54 @@ func _change_index(delta: int) -> void:
 	_apply_chapter(true)
 
 
+func _build_difficulty_selector() -> void:
+	var info := desc_label.get_parent()
+	if not is_instance_valid(info):
+		return
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 10)
+	info.add_child(row)
+	var names := ["난이도 1 · 기본", "난이도 2 · 빽빽", "난이도 3 · 초고밀도"]
+	for i in 3:
+		var btn := Button.new()
+		btn.text = names[i]
+		btn.custom_minimum_size = Vector2(150, 38)
+		btn.add_theme_font_size_override("font_size", 16)
+		var diff := i + 1
+		btn.pressed.connect(func() -> void: _select_difficulty(diff))
+		row.add_child(btn)
+		difficulty_buttons.append(btn)
+	selected_difficulty = clampi(Settings.current_difficulty, 1, 3)
+	_update_difficulty_buttons()
+
+
+func _select_difficulty(diff: int) -> void:
+	selected_difficulty = clampi(diff, 1, 3)
+	Settings.current_difficulty = selected_difficulty
+	_update_difficulty_buttons()
+
+
+func _update_difficulty_buttons() -> void:
+	for i in difficulty_buttons.size():
+		var btn := difficulty_buttons[i]
+		var active := (i + 1) == selected_difficulty
+		var sb := StyleBoxFlat.new()
+		sb.bg_color = Color(0.878, 0.416, 0.561, 1.0) if active else Color(0.18, 0.16, 0.26, 0.85)
+		sb.border_color = Color(1.0, 0.85, 0.9, 1.0) if active else Color(0.45, 0.42, 0.58, 0.7)
+		sb.set_border_width_all(2)
+		sb.set_corner_radius_all(10)
+		btn.add_theme_stylebox_override("normal", sb)
+		btn.add_theme_stylebox_override("hover", sb)
+		btn.add_theme_stylebox_override("pressed", sb)
+		btn.add_theme_color_override("font_color", Color(1, 1, 1, 1) if active else Color(0.82, 0.80, 0.92, 0.9))
+
+
 func _start_chapter() -> void:
 	if busy or mode != Mode.CHAPTER or CHAPTERS[index].locked:
 		return
 	busy = true
 	Settings.current_chapter = index + 1
+	Settings.current_difficulty = selected_difficulty
 	var target := SCENE_ECHO
 	var tween := create_tween()
 	tween.tween_property(fade, "color", Color(0, 0, 0, 1), 0.25)

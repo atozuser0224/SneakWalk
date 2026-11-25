@@ -99,9 +99,12 @@ const UNCLE_TEXTURES := [
 ]
 const PLAYER_FRAMES := preload("res://Assets/Art/Characters/me/player_frames.tres")
 const KID_FRAMES := preload("res://Assets/Art/Characters/me/kid/kid_frames.tres")
+const FATHER_FRAMES := preload("res://Assets/Art/Characters/father/father_frames.tres")
 const BPM := 120.0
 const BEAT := 60.0 / BPM
 const DIFFICULTY_BPMS := [120.0, 126.0, 134.0]
+const CH1_RETURN_BPMS := [132.0, 140.0, 150.0]
+const CH2_BPMS := [120.0, 128.0, 138.0]
 const PATTERN_START_BEATS := 1.0
 const BEATS_PER_PATTERN := 4
 const LEADIN_BEATS := 1.5
@@ -152,6 +155,49 @@ const DIFFICULTY_3_PATTERNS := [
 	[0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5],
 	[0.0, 0.5, 1.0, 1.5, 2.0, 2.5, {"beat": 3.0, "hold": 0.8}],
 ]
+# 챕터 2 (아빠가 라면 끓여 먹기): 안방->복도->거실->부엌(0..4) -> 라면 조리 3라운드(5..7) -> 귀환(8..11)
+const CH2_DIFFICULTY_1_PATTERNS := [
+	[0.0, 2.0],
+	[0.0, 1.0, 2.5],
+	[0.0, 1.5, 3.0],
+	[0.0, {"beat": 2.0, "hold": 1.2}],
+	[0.0, 1.0, 2.0, 3.0],
+	[{"beat": 0.0, "special": "cook_pot"}, {"beat": 1.0, "special": "cook_water"}, {"beat": 2.0, "hold": 1.4, "special": "cook_boil"}],
+	[{"beat": 0.0, "special": "cook_noodle"}, {"beat": 1.0, "special": "cook_soup"}, {"beat": 2.0, "special": "cook_stir"}, {"beat": 3.0, "special": "cook_stir"}],
+	[{"beat": 0.0, "special": "cook_egg"}, {"beat": 1.0, "special": "cook_stir"}, {"beat": 2.0, "hold": 1.5, "special": "cook_eat"}],
+	[0.0, 1.5, 2.5, 3.5],
+	[{"beat": 0.0, "hold": 1.2}, 2.0, 3.0],
+	[0.0, 0.5, 1.5, 2.5, 3.5],
+	[0.0, 1.0, {"beat": 2.0, "hold": 1.2}, 3.5],
+]
+const CH2_DIFFICULTY_2_PATTERNS := [
+	[0.0, 0.5, 1.5, 2.0, 2.5, 3.5],
+	[0.0, 0.5, 1.0, 2.0, 2.5, 3.0],
+	[0.0, 0.5, 1.0, {"beat": 2.0, "hold": 1.0}, 3.5],
+	[0.0, 0.5, 1.5, 2.0, 2.5, 3.0, 3.5],
+	[{"beat": 0.0, "hold": 0.9}, 1.5, 2.0, 2.5, 3.0, 3.5],
+	[{"beat": 0.0, "special": "cook_pot"}, {"beat": 0.5, "special": "cook_pot"}, {"beat": 1.0, "special": "cook_water"}, {"beat": 2.0, "hold": 1.2, "special": "cook_boil"}],
+	[{"beat": 0.0, "special": "cook_noodle"}, {"beat": 0.5, "special": "cook_soup"}, {"beat": 1.5, "special": "cook_stir"}, {"beat": 2.0, "special": "cook_stir"}, {"beat": 2.5, "special": "cook_stir"}, {"beat": 3.5, "special": "cook_stir"}],
+	[{"beat": 0.0, "special": "cook_egg"}, {"beat": 0.5, "special": "cook_stir"}, {"beat": 1.0, "special": "cook_stir"}, {"beat": 2.0, "hold": 1.3, "special": "cook_eat"}],
+	[0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5],
+	[{"beat": 0.0, "hold": 0.9}, 1.5, {"beat": 2.0, "hold": 0.9}, 3.5],
+	[0.0, 0.5, 1.0, 1.5, 2.5, 3.0, 3.5],
+	[0.0, 0.5, 1.0, 1.5, {"beat": 2.0, "hold": 1.0}, 3.5],
+]
+const CH2_DIFFICULTY_3_PATTERNS := [
+	[0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5],
+	[0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5],
+	[0.0, 0.5, 1.0, 1.5, {"beat": 2.0, "hold": 0.9}, 3.5],
+	[0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5],
+	[{"beat": 0.0, "hold": 0.8}, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5],
+	[{"beat": 0.0, "special": "cook_pot"}, {"beat": 0.5, "special": "cook_water"}, {"beat": 1.0, "special": "cook_water"}, {"beat": 1.5, "hold": 1.1, "special": "cook_boil"}, {"beat": 3.0, "special": "cook_stir"}, {"beat": 3.5, "special": "cook_stir"}],
+	[{"beat": 0.0, "special": "cook_noodle"}, {"beat": 0.5, "special": "cook_noodle"}, {"beat": 1.0, "special": "cook_soup"}, {"beat": 1.5, "special": "cook_soup"}, {"beat": 2.0, "special": "cook_stir"}, {"beat": 2.5, "special": "cook_stir"}, {"beat": 3.0, "special": "cook_stir"}, {"beat": 3.5, "special": "cook_stir"}],
+	[{"beat": 0.0, "special": "cook_egg"}, {"beat": 0.5, "special": "cook_stir"}, {"beat": 1.0, "special": "cook_stir"}, {"beat": 1.5, "special": "cook_stir"}, {"beat": 2.0, "hold": 1.1, "special": "cook_eat"}, {"beat": 3.5, "special": "cook_eat"}],
+	[0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5],
+	[{"beat": 0.0, "hold": 0.8}, 1.0, 1.5, {"beat": 2.0, "hold": 0.8}, 3.0, 3.5],
+	[0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5],
+	[0.0, 0.5, 1.0, 1.5, 2.0, 2.5, {"beat": 3.0, "hold": 0.8}],
+]
 const RESPONSE_WINDOW := 0.215
 const PERFECT_WINDOW := 0.095
 const GOOD_WINDOW := 0.185
@@ -162,6 +208,7 @@ const MAX_LIVES := 5
 
 @export_enum("player", "kid") var character_variant := "player"
 var player_base_scale := 0.72
+var player_base_offset := Vector2(-256.0, -315.0)
 
 const LIGHT_SPECS := [
 	{"x": 1450.0, "y": 290.0, "scale": 8.5, "energy": 1.45, "color": Color(1.0, 0.87, 0.72), "kind": "window", "phase": 0.0},
@@ -242,6 +289,7 @@ var step_foot_index := 0
 var active_hold_note: Dictionary = {}
 var space_held := false
 var cutscene_active := false
+var chapter_id := 1
 var difficulty_level := 1
 var active_bpm := 120.0
 var active_patterns: Array = DIFFICULTY_1_PATTERNS
@@ -256,10 +304,13 @@ var downstairs_stage_label: Label
 
 func _ready() -> void:
 	var flags := _flags()
-	difficulty_level = clampi(Settings.current_chapter, 1, 3)
+	chapter_id = clampi(Settings.current_chapter, 1, 2)
+	difficulty_level = clampi(Settings.current_difficulty, 1, 3)
 	for f in flags:
 		if f.begins_with("chapter="):
-			difficulty_level = clampi(int(f.trim_prefix("chapter=")), 1, 3)
+			chapter_id = clampi(int(f.trim_prefix("chapter=")), 1, 2)
+		elif f.begins_with("difficulty="):
+			difficulty_level = clampi(int(f.trim_prefix("difficulty=")), 1, 3)
 	_apply_difficulty()
 	_apply_character_variant()
 	_build_chart()
@@ -315,41 +366,95 @@ func _flags() -> Array[String]:
 
 
 func _apply_difficulty() -> void:
-	active_bpm = float(DIFFICULTY_BPMS[difficulty_level - 1])
-	match difficulty_level:
-		2:
-			active_patterns = DIFFICULTY_2_PATTERNS
-		3:
-			active_patterns = DIFFICULTY_3_PATTERNS
-		_:
-			active_patterns = DIFFICULTY_1_PATTERNS
-	var ui_title := get_node_or_null("UI/ChapterLabel") as Label
-	if is_instance_valid(ui_title):
-		ui_title.text = "난이도 %d · 살금 스텝" % difficulty_level
-	var start_title := get_node_or_null("StartOverlay/Panel/Margin/VBox/Title") as Label
-	if is_instance_valid(start_title):
-		start_title.text = "살금 스텝 · %d단계" % difficulty_level
-	var start_desc := get_node_or_null("StartOverlay/Panel/Margin/VBox/Desc") as Label
-	if is_instance_valid(start_desc):
+	if chapter_id == 2:
+		active_bpm = float(CH2_BPMS[difficulty_level - 1])
 		match difficulty_level:
 			2:
-				start_desc.text = "빽빽한 8분음표 연타와 엇박 패턴! (126 BPM)"
+				active_patterns = CH2_DIFFICULTY_2_PATTERNS
 			3:
-				start_desc.text = "초고밀도 8분음표 풀채움 패턴! (134 BPM)"
+				active_patterns = CH2_DIFFICULTY_3_PATTERNS
 			_:
-				start_desc.text = "누나 발자국을 듣고 따라 걸어요. (120 BPM)"
+				active_patterns = CH2_DIFFICULTY_1_PATTERNS
+	else:
+		active_bpm = float(DIFFICULTY_BPMS[difficulty_level - 1])
+		match difficulty_level:
+			2:
+				active_patterns = DIFFICULTY_2_PATTERNS
+			3:
+				active_patterns = DIFFICULTY_3_PATTERNS
+			_:
+				active_patterns = DIFFICULTY_1_PATTERNS
+	var ui_title := get_node_or_null("UI/ChapterLabel") as Label
+	if is_instance_valid(ui_title):
+		ui_title.text = ("챕터 2 · 아빠의 라면 (%d단계)" if chapter_id == 2 else "챕터 1 · 물 마시기 (%d단계)") % difficulty_level
+	var start_title := get_node_or_null("StartOverlay/Panel/Margin/VBox/Title") as Label
+	if is_instance_valid(start_title):
+		start_title.text = ("아빠가 라면 끓여 먹기 · %d단계" if chapter_id == 2 else "내가 물 마시러 가기 · %d단계") % difficulty_level
+	var start_desc := get_node_or_null("StartOverlay/Panel/Margin/VBox/Desc") as Label
+	if is_instance_valid(start_desc):
+		if chapter_id == 2:
+			start_desc.text = "안방 → 복도 → 거실 → 부엌(라면 조리!) → 안방 (%d BPM)" % int(active_bpm)
+		else:
+			var ret_bpm := int(CH1_RETURN_BPMS[difficulty_level - 1])
+			start_desc.text = "내 방 → 거실 → 부엌(물 마시기!) → 내 방 (%d→%d BPM)" % [int(active_bpm), ret_bpm]
 
 
 func _apply_character_variant() -> void:
-	if character_variant == "kid":
+	if chapter_id == 2:
+		player_base_scale = 1.65
+		player_base_offset = Vector2(-64.0, -142.0)
+		player.sprite_frames = FATHER_FRAMES
+	elif character_variant == "kid":
 		player_base_scale = 1.0
+		player_base_offset = Vector2(-256.0, -421.0)
 		player.sprite_frames = KID_FRAMES
-		player.offset = Vector2(-256.0, -421.0)
 	else:
 		player_base_scale = 0.72
+		player_base_offset = Vector2(-256.0, -315.0)
 		player.sprite_frames = PLAYER_FRAMES
-		player.offset = Vector2(-256.0, -315.0)
+	player.offset = player_base_offset
 	player.scale = Vector2.ONE * player_base_scale
+
+
+func _round_route(round_index: int) -> Dictionary:
+	if chapter_id == 2:
+		# 안방(9950) -> 복도(7750) -> 부엌(5750) [0..4]
+		# 라면 조리 [5..7] -> 복도(7900) -> 안방(9950) [8..11]
+		match round_index:
+			0:
+				return {"start_x": 9950.0, "end_x": 8850.0, "flip_h": true, "bpm": active_bpm, "label": "안방 → 복도"}
+			1:
+				return {"start_x": 8850.0, "end_x": 7750.0, "flip_h": true, "bpm": active_bpm, "label": "복도 이동"}
+			2:
+				return {"start_x": 7750.0, "end_x": 6800.0, "flip_h": true, "bpm": active_bpm, "label": "복도 → 부엌"}
+			3:
+				return {"start_x": 6800.0, "end_x": 6100.0, "flip_h": true, "bpm": active_bpm, "label": "거실·부엌 진입"}
+			4:
+				return {"start_x": 6100.0, "end_x": 5750.0, "flip_h": true, "bpm": active_bpm, "label": "부엌 도착!"}
+			5, 6, 7:
+				return {"start_x": 5750.0, "end_x": 5750.0, "flip_h": false, "bpm": active_bpm, "label": "라면 조리!"}
+			8:
+				return {"start_x": 5750.0, "end_x": 6800.0, "flip_h": false, "bpm": active_bpm, "label": "부엌 → 복도"}
+			9:
+				return {"start_x": 6800.0, "end_x": 7900.0, "flip_h": false, "bpm": active_bpm, "label": "복도 통과"}
+			10:
+				return {"start_x": 7900.0, "end_x": 8950.0, "flip_h": false, "bpm": active_bpm, "label": "복도 → 안방"}
+			_:
+				return {"start_x": 8950.0, "end_x": 9950.0, "flip_h": false, "bpm": active_bpm, "label": "안방 복귀!"}
+	# 챕터 1: 내 방(2000) -> 거실(3900) -> 부엌(5600) [0..4], 물 마시기 [5], 부엌->거실->내 방 가속 복귀 [6..11]
+	var ret_bpm := float(CH1_RETURN_BPMS[difficulty_level - 1])
+	match round_index:
+		0, 1, 2, 3, 4:
+			var sx := 2000.0 + float(round_index) * 720.0
+			var ex := 2000.0 + float(round_index + 1) * 720.0
+			return {"start_x": sx, "end_x": ex, "flip_h": false, "bpm": active_bpm, "label": "물 마시러 가는 중"}
+		5:
+			return {"start_x": 5600.0, "end_x": 5600.0, "flip_h": false, "bpm": active_bpm, "label": "물 마시기!"}
+		_:
+			var ret_idx := round_index - 6
+			var sx := 5600.0 - float(ret_idx) * 600.0
+			var ex := 5600.0 - float(ret_idx + 1) * 600.0
+			return {"start_x": sx, "end_x": ex, "flip_h": true, "bpm": ret_bpm, "label": "가속 복귀! (어머니 주의)"}
 
 
 func _build_chart() -> void:
@@ -362,12 +467,16 @@ func _build_chart() -> void:
 	var global_step_counter := 0
 
 	for round_index in active_patterns.size():
-		var bpm := active_bpm
+		var route := _round_route(round_index)
+		var bpm := float(route["bpm"])
 		var beat_dur := 60.0 / bpm
 		var call_base := cursor_time
 		var leadin_base := cursor_time + float(BEATS_PER_PATTERN) * beat_dur
 		var response_base := leadin_base + LEADIN_BEATS * beat_dur
 		var round_end := cursor_time + BEATS_PER_ROUND * beat_dur
+		var start_x := float(route["start_x"])
+		var end_x := float(route["end_x"])
+		var flip_h := bool(route["flip_h"])
 		round_timings.append({
 			"round": round_index,
 			"bpm": bpm,
@@ -376,6 +485,10 @@ func _build_chart() -> void:
 			"leadin": leadin_base,
 			"response": response_base,
 			"end": round_end,
+			"start_x": start_x,
+			"end_x": end_x,
+			"flip_h": flip_h,
+			"label": String(route["label"]),
 		})
 		var pattern: Array = active_patterns[round_index]
 		for step_order in pattern.size():
@@ -396,7 +509,8 @@ func _build_chart() -> void:
 				global_step_counter += 1
 			var is_offbeat := not is_equal_approx(beat_offset, roundf(beat_offset))
 			var is_last := step_order == pattern.size() - 1
-			var target_x := CAMERA_START + (float(round_index * BEATS_PER_PATTERN) + beat_offset + 1.0) * BEAT_DIST
+			var frac := clampf((beat_offset + 0.5) / float(BEATS_PER_PATTERN), 0.0, 1.0)
+			var target_x := lerpf(start_x, end_x, frac)
 			call_notes.append({
 				"time": call_base + beat_offset * beat_dur,
 				"round": round_index,
@@ -437,7 +551,9 @@ func _reset_state() -> void:
 	started = false
 	finished = false
 	song_time = 0.0
-	camera_x = CAMERA_START
+	var init_route := _round_route(0)
+	camera_x = float(init_route["start_x"])
+	player.flip_h = bool(init_route["flip_h"])
 	lives = MAX_LIVES
 	noise = 0.0
 	combo = 0
@@ -615,8 +731,13 @@ func _update_phase() -> void:
 				phase_label.text = "따라 걷기  %d/%d" % [current_round + 1, active_patterns.size()]
 			break
 	if current_round != prev_round and current_round >= 0:
+		var t_info: Dictionary = round_timings[current_round]
+		player.flip_h = bool(t_info.get("flip_h", false))
+		var sub_lbl := get_node_or_null("UI/SubLabel") as Label
+		if is_instance_valid(sub_lbl):
+			sub_lbl.text = "← → 번갈아 입력   ·   %s (%d BPM)" % [String(t_info.get("label", "")), int(roundf(float(t_info.get("bpm", active_bpm))))]
 		# 이전 라운드 마지막 노트를 놓쳤더라도 다음 라운드 기준 X로 정렬
-		var expected_x := CAMERA_START + float(current_round * BEATS_PER_PATTERN) * BEAT_DIST
+		var expected_x := float(t_info.get("start_x", CAMERA_START))
 		if absf(camera_x - expected_x) > 1.0:
 			var align := create_tween()
 			align.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
@@ -1090,7 +1211,14 @@ func _update_beat_timeline() -> void:
 			var txt := ""
 			var sp := String(next_note.get("special", ""))
 			if bool(next_note.get("is_hold", false)):
-				txt = "💧 물 받기 (꾹!)" if sp == "drink" else "Space 꾹! 멈춤"
+				if sp == "drink":
+					txt = "💧 물 받기 (꾹!)"
+				elif sp == "cook_boil":
+					txt = "🔥 불 켜기 (Space 꾹!)"
+				elif sp == "cook_eat":
+					txt = "🍜 라면 완성! (Space 꾹!)"
+				else:
+					txt = "Space 꾹! 멈춤"
 				bs.border_color = Color(0.96, 0.48, 0.66, 0.95)
 				next_key_label.add_theme_color_override("font_color", Color(1.0, 0.72, 0.84, 1.0))
 			elif sp == "drink_btn":
@@ -1103,6 +1231,19 @@ func _update_beat_timeline() -> void:
 				txt = "%s  꿀꺽!" % arrow
 				bs.border_color = Color(0.50, 0.92, 0.98, 0.95)
 				next_key_label.add_theme_color_override("font_color", Color(0.62, 0.95, 1.0, 1.0))
+			elif sp.begins_with("cook_"):
+				var arrow := "←" if bool(next_note.get("is_left", true)) else "→"
+				var cook_names := {
+					"cook_pot": "냄비 올리기!",
+					"cook_water": "물 붓기!",
+					"cook_noodle": "면 투하!",
+					"cook_soup": "스프 넣기!",
+					"cook_stir": "휘젓기!",
+					"cook_egg": "계란 탁!",
+				}
+				txt = "%s  %s" % [arrow, String(cook_names.get(sp, "조리!"))]
+				bs.border_color = Color(1.0, 0.72, 0.36, 0.95)
+				next_key_label.add_theme_color_override("font_color", Color(1.0, 0.88, 0.62, 1.0))
 			elif bool(next_note.get("is_left", true)):
 				txt = "←  왼발"
 				bs.border_color = Color(0.50, 0.92, 0.98, 0.95)
@@ -1152,7 +1293,7 @@ func _update_response_notes() -> void:
 			combo = 0
 			_add_noise(18.0)
 			judgment.add_theme_color_override("font_color", Color(0.96, 0.42, 0.56, 1.0))
-			_flash("MISS")
+			_flash("느리다! 어머니가 깰 듯!" if (chapter_id == 1 and current_round >= 6) else "MISS")
 			_shake()
 			sfx_miss.play()
 			_play_surprise()
@@ -1242,7 +1383,7 @@ func _press_step(key_kind: String = "any") -> void:
 		combo = 0
 		_add_noise(12.0)
 		judgment.add_theme_color_override("font_color", Color(0.96, 0.42, 0.56, 1.0))
-		_flash("MISS")
+		_flash("느리다! 어머니가 깰 듯!" if (chapter_id == 1 and current_round >= 6) else "MISS")
 		sfx_miss.play()
 		_play_surprise()
 		_update_combo()
@@ -1376,7 +1517,7 @@ func _judge_response(note: Dictionary, timing_error: float) -> void:
 		sfx_perfect.pitch_scale = 0.98 + minf(float(combo), 8.0) * 0.015
 		sfx_perfect.play()
 		judgment.add_theme_color_override("font_color", Color(1.0, 0.84, 0.42, 1.0))
-		_flash("꿀꺽! ♪" if sp == "drink_sip" else ("버튼 콕!" if sp == "drink_btn" else "PERFECT"))
+		_flash("꿀꺽! ♪" if sp == "drink_sip" else ("버튼 콕!" if sp == "drink_btn" else ("조리 성공! ♪" if sp.begins_with("cook_") else "PERFECT")))
 		if is_instance_valid(footprint):
 			footprint.set_status("hit")
 			footprint.scale = Vector2.ONE
@@ -1388,7 +1529,7 @@ func _judge_response(note: Dictionary, timing_error: float) -> void:
 			_add_noise(-3.0)
 		sfx_good.play()
 		judgment.add_theme_color_override("font_color", Color(0.56, 0.90, 0.94, 1.0))
-		_flash("꿀꺽!" if sp == "drink_sip" else ("버튼 콕!" if sp == "drink_btn" else "GOOD"))
+		_flash("꿀꺽!" if sp == "drink_sip" else ("버튼 콕!" if sp == "drink_btn" else ("조리!" if sp.begins_with("cook_") else "GOOD")))
 		if is_instance_valid(footprint):
 			footprint.set_status("hit")
 			footprint.scale = Vector2.ONE
@@ -1400,7 +1541,7 @@ func _judge_response(note: Dictionary, timing_error: float) -> void:
 		sfx_miss.play()
 		_play_surprise()
 		judgment.add_theme_color_override("font_color", Color(0.96, 0.42, 0.56, 1.0))
-		_flash("MISS")
+		_flash("느리다! 어머니가 깰 듯!" if (chapter_id == 1 and current_round >= 6) else "MISS")
 		if is_instance_valid(footprint):
 			footprint.set_status("miss")
 			footprint.scale = Vector2.ONE
@@ -1428,8 +1569,11 @@ func _do_step(target_x: float, special_kind: String = "") -> void:
 		else:
 			player.frame = 5
 		return
-	if character_variant != "kid":
-		player.offset = Vector2(-192.0, -315.0)
+	if special_kind.begins_with("cook_") and player.sprite_frames.has_animation("cook"):
+		player.offset = player_base_offset
+		player.play("cook")
+		return
+	player.offset = player_base_offset
 	# 한 걸음마다 왼발/오른발 애니메이션과 상하·앞뒤 탄성을 번갈아 적용해 역동감 부여
 	player.position.x = 1024.0 if is_left else 1012.0
 	player.position.y = PLAYER_Y - (18.0 if is_left else 8.0)
