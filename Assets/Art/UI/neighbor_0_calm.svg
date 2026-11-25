@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <circle cx="64" cy="64" r="58" fill="#2A2640" stroke="#7A7399" stroke-width="4"/>
+  <!-- Hair -->
+  <path d="M24 58 C24 28 104 28 104 58 C100 38 28 38 24 58 Z" fill="#3A3548" stroke="#181520" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Face -->
+  <circle cx="64" cy="68" r="36" fill="#F8D2B8" stroke="#181520" stroke-width="4"/>
+  <!-- Hair bangs -->
+  <path d="M28 60 C34 40 52 34 66 36 C82 34 96 42 100 58 C92 48 80 46 68 48 C54 46 38 50 28 60 Z" fill="#3A3548" stroke="#181520" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- Sleeping closed eyes -->
+  <path d="M40 68 Q48 74 56 68" fill="none" stroke="#181520" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M72 68 Q80 74 88 68" fill="none" stroke="#181520" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Relaxed eyebrows -->
+  <path d="M41 58 Q48 55 55 58" fill="none" stroke="#181520" stroke-width="3" stroke-linecap="round"/>
+  <path d="M73 58 Q80 55 87 58" fill="none" stroke="#181520" stroke-width="3" stroke-linecap="round"/>
+  <!-- Gentle mouth -->
+  <path d="M58 84 Q64 88 70 84" fill="none" stroke="#181520" stroke-width="3" stroke-linecap="round"/>
+  <!-- Zzz -->
+  <path d="M96 34 L106 34 L96 44 L106 44" fill="none" stroke="#9EC5FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

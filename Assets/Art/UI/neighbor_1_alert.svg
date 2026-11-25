@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <circle cx="64" cy="64" r="58" fill="#3B314A" stroke="#D9A86C" stroke-width="4"/>
+  <!-- Hair -->
+  <path d="M24 58 C24 28 104 28 104 58 C100 38 28 38 24 58 Z" fill="#3A3548" stroke="#181520" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Face -->
+  <circle cx="64" cy="68" r="36" fill="#F8D2B8" stroke="#181520" stroke-width="4"/>
+  <!-- Hair bangs -->
+  <path d="M28 60 C34 40 52 34 66 36 C82 34 96 42 100 58 C92 48 80 46 68 48 C54 46 38 50 28 60 Z" fill="#3A3548" stroke="#181520" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- Suspicious eyes looking up -->
+  <circle cx="48" cy="67" r="4" fill="#181520"/>
+  <circle cx="80" cy="67" r="4" fill="#181520"/>
+  <!-- Furrowed eyebrows -->
+  <path d="M39 56 L55 60" fill="none" stroke="#181520" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M89 56 L73 60" fill="none" stroke="#181520" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Flat uncertain mouth -->
+  <path d="M56 85 Q64 83 72 86" fill="none" stroke="#181520" stroke-width="3.2" stroke-linecap="round"/>
+  <!-- Question mark -->
+  <path d="M100 28 C100 22 110 22 110 28 C110 32 104 33 104 37" fill="none" stroke="#FFD670" stroke-width="3.2" stroke-linecap="round"/>
+  <circle cx="104" cy="43" r="2" fill="#FFD670"/>
+</svg>

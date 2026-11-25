@@ -19,10 +19,6 @@ config/features=PackedStringArray("4.7", "GL Compatibility")
 
 Settings="*res://Scripts/SettingsManager.gd"
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/sprite_frames_generator/plugin.cfg")
-
 [display]
 
 window/size/viewport_width=1920
@@ -31,6 +27,10 @@ window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/sprite_frames_generator/plugin.cfg")
 
 [rendering]
 

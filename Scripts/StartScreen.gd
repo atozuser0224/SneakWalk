@@ -8,9 +8,9 @@ const SLIDE := 1920.0
 const PINK := Color(0.878, 0.416, 0.561, 1)
 
 const CHAPTERS := [
-	{"label": "챕터 1", "title": "물 마시러 가기", "desc": "내 방 → 거실 → 부엌 → 다시 내 방", "locked": false},
-	{"label": "챕터 2", "title": "아빠의 라면", "desc": "안방 → 복도 → 거실 → 부엌 → 안방", "locked": false},
-	{"label": "챕터 3", "title": "???", "desc": "", "locked": true},
+	{"label": "난이도 1", "title": "물 마시러 가기 · 기본", "desc": "여유로운 발걸음 · 정박과 기본 엇박 (120 BPM)", "locked": false},
+	{"label": "난이도 2", "title": "빽빽한 발걸음", "desc": "8분음표 연타와 엇박 · 더블 홀드 (126 BPM)", "locked": false},
+	{"label": "난이도 3", "title": "초고밀도 살금살금", "desc": "쉬지 않는 8분음표 풀채움 · 고속 패턴 (134 BPM)", "locked": false},
 ]
 
 @onready var panorama: Node2D = %Panorama
@@ -80,6 +80,7 @@ func _ready() -> void:
 	chapter_ui.hide()
 	settings_overlay.hide()
 	_setup_rt_overlay()
+	rt_overlay.hide()
 
 	var flags := _flags()
 	for flag in flags:
@@ -290,7 +291,7 @@ func _start_chapter() -> void:
 		return
 	busy = true
 	Settings.current_chapter = index + 1
-	var target := SCENE_ECHO if index == 0 else SCENE_MAIN
+	var target := SCENE_ECHO
 	var tween := create_tween()
 	tween.tween_property(fade, "color", Color(0, 0, 0, 1), 0.25)
 	await tween.finished

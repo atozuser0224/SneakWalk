@@ -26,12 +26,15 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	var t := Time.get_ticks_msec() / 1000.0
+	var sway := Vector2(sin(t * 0.23) * 38.0, sin(t * 0.37) * 12.0)
 	var offset := (get_parent() as Node2D).position
 	if _sun_light != null:
-		_sun_light.position = SUN_SCREEN - offset
+		_sun_light.position = SUN_SCREEN - offset + sway
+		_sun_light.energy = SUN.energy + sin(t * 0.8) * 0.06
 	if _sun_beam != null:
 		var size: Vector2 = SUN.beam_size
-		_sun_beam.position = SUN_SCREEN - offset - Vector2(size.x * 0.5, 0.0)
+		_sun_beam.position = SUN_SCREEN - offset + sway * 0.6 - Vector2(size.x * 0.5, 0.0)
 
 
 func get_sun_screen_pos() -> Vector2:
